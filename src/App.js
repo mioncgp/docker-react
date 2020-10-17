@@ -60,7 +60,6 @@ class App extends Component {
     const { isSignedIn, route, user } = this.state;
     return (
       <div className="App">
-        learn react
         <Navigation
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
