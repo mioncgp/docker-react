@@ -10,9 +10,6 @@ before_install:
 script:
   - docker run -e CI=true mioncgp/docker-react  npm run test
 
-before_deploy:
-  - docker build -t mioncgp/docker-react .
-
 deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
@@ -20,7 +17,7 @@ deploy:
   env: "DockerReact-env-2"
   bucket_name: "elasticbeanstalk-us-east-2-210534854944"
   bucket_path: "docker-react"
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
   on:
     branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
