@@ -1,26 +1,11 @@
-# FROM node:alpine
-# WORKDIR '/app'
-# COPY package*.json ./
-# RUN npm install
-# COPY ./ ./
-# RUN npm run build
-
-# FROM nginx
-# EXPOSE 80
-# COPY --from=0 /app/build /usr/share/nginx/html
-
-
-# build stage
 FROM node:alpine
-WORKDIR /app
+WORKDIR '/app'
 COPY package*.json ./
 RUN npm install
-COPY . .
-RUN npm run build     
+COPY ./ ./
+RUN npm run build
 
-# production stage
 FROM nginx
-RUN rm -rf /var/www/html/index.nginx-debian.html
-COPY --from=0  /app/build /usr/share/nginx/html
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+COPY --from=0 /app/build /usr/share/nginx/html
+
